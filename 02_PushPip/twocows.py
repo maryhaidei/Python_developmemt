@@ -7,15 +7,13 @@ parser.add_argument('m1', type=str, help='Message for the first cow')
 parser.add_argument('m2', type=str, help='Message for the second cow')
 
 parser.add_argument(
-    "-e",
+    "-e", 
     type=str,
     help="An eye string. This is ignored if a preset mode is given",
-    dest="eyes",
-    default=Option.eyes,
-    metavar="eye_string",
+    default='oo',
 )
 parser.add_argument(
-    "-f", type=str, metavar="cowfile",
+    "-f", type=str,
     help="Either the name of a cow specified in the COWPATH, "
          "or a path to a cowfile (if provided as a path, the path must "
          "contain at least one path separator)",
@@ -27,22 +25,17 @@ parser.add_argument(
 parser.add_argument(
     "-E",
     type=str,
-    default=None,
     help="An eye string. This is ignored if a preset mode is given",
-    dest="eyes",
-    default=Option.eyes,
-    metavar="eye_string",
-
+    default='oo',
 )
 parser.add_argument(
-    "-F", type=str, metavar="cowfile",
+    "-F", type=str,
     help="Either the name of a cow specified in the COWPATH, "
          "or a path to a cowfile (if provided as a path, the path must "
          "contain at least one path separator)",
 )
 parser.add_argument(
     "-N", 
-    default=True,
     action="store_false",
     help="If given, text in the speech bubble will not be wrapped"
 )
@@ -65,8 +58,8 @@ def merge_cow(cow1, cow2):
     return new
     
 
-cow1 = cowsay.cowsay(message=args.m1, eyes=args.eyes, tongue=args.tongue, cow=args.cowfile)
-cow2 = cowsay.cowsay(message=args.m2, eyes=args.E, tongue=args.N, cow=args.F)
+cow1 = cowsay.cowsay(message=args.m1, eyes=args.e,  wrap_text=args.n, cow=args.f)
+cow2 = cowsay.cowsay(message=args.m2, eyes=args.E,  wrap_text=args.N, cow=args.F)
 
 l1=cow1.count('\n')
 l2=cow2.count('\n') 
