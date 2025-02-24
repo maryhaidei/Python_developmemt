@@ -33,11 +33,24 @@ def get_max_str(a):
         if b=='\n' : m=m if m>=k else k; k=0
         k+=1
     return m
+def merge_cow(cow1, cow2): 
+    new=''
+    m=get_max_str(cow1); e=0; s=0;  
+    for a in cow1: 
+        if a=='\n': 
+            new+=cow1[s:e+1]+cow2[s2:(e2:=cow2.index('\n')+1)]
+            e+=1; s=e+1; cow2=cow2[e2:]
+        else: e+=1
+    return new
     
 
 cow1=cowsay.cowsay(sys.argv[-2])
 cow2=cowsay.cowsay(sys.argv[-1], F, eyes = E, wrap_text=N)
 l1=cow1.count('\n')
-l2=cow2.count('\n')
-if l1==l2: 
+l2=cow2.count('\n') 
+if l1==l2:
+    new=merge_cow(cow1, cow2)
+#else: 
+    
+            
     
