@@ -75,6 +75,3 @@ if l1<l2: cow1='\n'*(l2-l1)+cow1
 elif l2<l1: cow2='\n'*(l2-l1)+cow2
 
 print(merge_cow(cow1, cow2))
-    
-            
-    
