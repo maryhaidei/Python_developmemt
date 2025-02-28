@@ -29,7 +29,7 @@ def gameplay(a: typing.Callable[[str, typing.Optional[typing.List[str]]], str],
         b, c = bullscows(a("Введите слово:", words), s); asks+=1
         inf("Быки: {}, Коровы: {}", b, c)
         if b == len(s): break; 
-    
+    return asks
 
 def read_dict(dit, l): 
     if dit.startswith(('http://', 'https://')):
