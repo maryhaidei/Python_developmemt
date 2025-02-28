@@ -55,7 +55,7 @@ def main():
     if not dit: 
         print("В словаре нет слов длинны ", lenth)
         return 
-    print('Вы угадали слово! Количество попыток:', gameload(ask, inform, lenth))
+    print('Вы угадали слово! Количество попыток:', gameplay(ask, inform, dit))
     
 if __name__ == "__main__":
     main() 
