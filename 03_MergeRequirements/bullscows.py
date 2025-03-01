@@ -3,6 +3,24 @@ import sys
 import urllib.request
 import typing
 import cowsay
+from io import StringIO
+
+CHARACTER=cowsay.read_dot_cow(StringIO("""
+$the_cow = <<EOC;
+         $thoughts
+          $thoughts
+         
+　　　　　 ／＞　 フ
+　　　　　| 　_　 _|
+　 　　　／`ミ _x 彡
+　　 　 /　　　 　 |
+　　　 /　 ヽ　　 ﾉ
+　／￣|　　 |　|　|
+　| (￣ヽ＿_ヽ_)_)
+　＼二つ
+
+EOC
+"""))
 
 def bullscows(d: str, z: str) -> (int, int): 
     cows = sum(min(z.count(l),z.count(l)) for l in set([l for l in d+z if l in d and l in z]))
@@ -10,11 +28,11 @@ def bullscows(d: str, z: str) -> (int, int):
     return (bulls, cows-bulls)
 
 def ask(promt, valid): 
-    print(cowsay.cowsay(promt,cow=random.choice(cowsay.list_cows())))
+    print(cowsay.cowthink(promt, cowfile=CHARACTER))
     st=input()
     if valid:
         while st not in valid: 
-            print(cowsay.cowsay(promt,cow=random.choice(cowsay.list_cows())))
+            print(cowsay.cowthink(promt, cowfile=CHARACTER))
             st=input()
     return st 
 
