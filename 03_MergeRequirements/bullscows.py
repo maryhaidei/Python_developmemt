@@ -2,23 +2,24 @@ import random
 import sys 
 import urllib.request
 import typing
+import cowsay
 
 def bullscows(d: str, z: str) -> (int, int): 
-    cows = sum([1 for c in set(d) if c in set(z)])
+    cows = sum(min(z.count(l),z.count(l)) for l in set([l for l in d+z if l in d and l in z]))
     bulls = sum ([1 for i in range(len(d)) if d[i]==z[i]])
     return (bulls, cows-bulls)
 
 def ask(promt, valid): 
-    print(promt)
+    print(cowsay.cowsay(promt,cow=random.choice(cowsay.list_cows())))
     st=input()
     if valid:
         while st not in valid: 
-            print(promt)
+            print(cowsay.cowsay(promt,cow=random.choice(cowsay.list_cows())))
             st=input()
     return st 
 
 def inform(format_string: str, bulls: int, cows: int) -> None: 
-    print(format_string.format(bulls, cows))
+    print(cowsay.cowsay(format_string.format(bulls, cows), cow=random.choice(cowsay.list_cows())))
 
 def gameplay(a: typing.Callable[[str, typing.Optional[typing.List[str]]], str],
              inf: typing.Callable[[str, int, int], None],
