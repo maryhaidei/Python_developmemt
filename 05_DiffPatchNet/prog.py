@@ -37,8 +37,28 @@ async def Exec(cmd: str):
                             stopped = True
  
 async def cowChat(reader, writer):
-       pass     
- 
+       login = None
+       buffer = asyncio.Queue()
+       send = asyncio.create_task(reader.readline())
+       receive = asyncio.create_task(buffer.get())
+       stopped = False
+       while not reader.at_eof():
+              done, pending = await asyncio.wait([send, receive],return_when=asyncio.FIRST_COMPLETED)
+              for task in done:
+                     if task is send:
+                            send = asyncio.create_task(reader.readline())
+                            await Exec(task.result().decode())
+                            if stopped:break
+                     elif task is receive:
+                            receive = asyncio.create_task(buffer.get())
+                            writer.write(f"{task.result()}\n".encode())
+                            await writer.drain()
+              if stopped:break
+       send.cancel()
+       receive.cancel()
+       writer.close()
+       await writer.wait_closed()
+       
 async def main():
        server = await asyncio.start_server(cowChat, "localhost", 1337)
        async with server: 
